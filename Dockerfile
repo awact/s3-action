@@ -23,7 +23,7 @@ WORKDIR ${WORKDIR}
 
 RUN pip install --upgrade pip && pip install pipenv
 
-RUN pipenv sync --dev
+RUN pipenv install --system --ignore-pipfile --deploy
 
 ADD entrypoint.sh /entrypoint.sh
 
