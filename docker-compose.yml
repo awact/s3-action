@@ -1,8 +1,0 @@
-version: "3.4"
-services:
-  kaiml-eda:
-    build: .
-    image: awact/s3-action
-    ports:
-      - "8888:8888"
-    command: pipenv run jupyter notebook --ip 0.0.0.0 --no-browser --allow-root

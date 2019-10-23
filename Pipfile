@@ -13,6 +13,7 @@ pep8 = "*"
 tox = "*"
 
 [packages]
+awscli = "*"
 
 [pipenv]
 allow_prereleases = true

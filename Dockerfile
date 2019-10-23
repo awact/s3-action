@@ -1,48 +1,30 @@
-# References:
-# https://github.com/anibali/docker-pytorch/blob/master/cuda-10.0/Dockerfile
-# https://github.com/pypa/pipenv/blob/master/Dockerfile
+FROM python:3.7-alpine
 
-# Base Image CUDA
-FROM nvidia/cuda:10.0-base-ubuntu18.04
+LABEL "com.github.actions.name"="S3 Sync"
+LABEL "com.github.actions.description"="Sync a Directory to a S3 repository"
+LABEL "com.github.actions.icon"="refresh-cw"
+LABEL "com.github.actions.color"="green"
 
-# Install Basic Utilities
-RUN apt-get update \
-    && apt-get install -y \
-    curl \
+LABEL version="0.0.1"
+LABEL repository="https://github.com/awact/s3-action"
+LABEL homepage="https://github.com/awact/s3-action"
+LABEL maintainer="Shun Kakinoki @shunkakinoki"
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     ca-certificates \
-    sudo \
     git \
-    bzip2 \
-    libx11-6 \
-    libffi-dev \
-    software-properties-common \
-    && add-apt-repository ppa:jonathonf/python-3.7 \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install Python3.6
-RUN apt-get update \
-    && apt-get install -y \
-    python3.7 \
-    python3.7-dev \
-    python3-pip
+ENV WORKDIR /app/
 
-# Add Backwards Compatibility
-RUN rm -rf /usr/bin/python3 && ln /usr/bin/python3.7 /usr/bin/python3
+WORKDIR ${WORKDIR}
 
-# Set Env Variables
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
+RUN pip install --upgrade pip && pip install pipenv
 
-# Install Pip3 Pipenv
-RUN pip3 install pipenv
+RUN pipenv sync --dev
 
-# Create a `app` Working Directory
-RUN mkdir /app
-WORKDIR /app
+ADD entrypoint.sh /entrypoint.sh
 
-# Copying Pipfile & Pipfile.lock
-COPY Pipfile Pipfile
-COPY Pipfile.lock Pipfile.lock
-
-# Install Dependencies
-RUN set -ex && pipenv sync --dev
+ENTRYPOINT ["/entrypoint.sh"]
