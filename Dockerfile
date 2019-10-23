@@ -11,7 +11,7 @@ LABEL homepage="https://github.com/awact/s3-action"
 LABEL maintainer="Shun Kakinoki @shunkakinoki"
 
 ENV WORKDIR /app/
-
+RUN mkdir ${WORKDIR}
 WORKDIR ${WORKDIR}
 
 RUN pip install --upgrade pip && pip install pipenv
