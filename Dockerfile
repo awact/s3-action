@@ -14,12 +14,12 @@ ENV WORKDIR /app/
 RUN mkdir ${WORKDIR}
 WORKDIR ${WORKDIR}
 
-RUN pip install --upgrade pip && pip install pipenv
-
-RUN pipenv install --system --ignore-pipfile --deploy
-
 COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
 COPY entrypoint.sh /entrypoint.sh
+
+RUN pip install --upgrade pip && pip install pipenv
+
+RUN pipenv install --system --ignore-pipfile --deploy
 
 ENTRYPOINT ["/entrypoint.sh"]
