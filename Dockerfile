@@ -10,13 +10,6 @@ LABEL repository="https://github.com/awact/s3-action"
 LABEL homepage="https://github.com/awact/s3-action"
 LABEL maintainer="Shun Kakinoki @shunkakinoki"
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    ca-certificates \
-    git \
-    && apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 ENV WORKDIR /app/
 
 WORKDIR ${WORKDIR}
