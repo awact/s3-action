@@ -10,21 +10,16 @@ LABEL repository="https://github.com/awact/s3-action"
 LABEL homepage="https://github.com/awact/s3-action"
 LABEL maintainer="Shun Kakinoki @shunkakinoki"
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    ca-certificates \
-    git \
-    && apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 ENV WORKDIR /app/
-
+RUN mkdir ${WORKDIR}
 WORKDIR ${WORKDIR}
+
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
+COPY entrypoint.sh /entrypoint.sh
 
 RUN pip install --upgrade pip && pip install pipenv
 
 RUN pipenv install --system --ignore-pipfile --deploy
-
-ADD entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
