@@ -25,6 +25,8 @@ RUN pip install --upgrade pip && pip install pipenv
 
 RUN pipenv install --system --ignore-pipfile --deploy
 
-ADD entrypoint.sh /entrypoint.sh
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
+COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
