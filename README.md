@@ -1,8 +1,8 @@
 # s3-action
 
-Github action to sync to AWS s3 bucket.
-Fork of [s3-sync-action](https://github.com/jakejarvis/s3-sync-action)
-See [action.yml](./action.yml) for Comprehensive List of Options.
+Github action to sync to AWS s3 bucket.  
+Fork of [s3-sync-action](https://github.com/jakejarvis/s3-sync-action)  
+See [action.yml](./action.yml) for Comprehensive List of Options.  
 
 ## Usage
 
