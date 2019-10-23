@@ -1,0 +1,26 @@
+name: "S3 Sync"
+description: "Wait a designated number of milliseconds"
+inputs:
+  AWS_ACCESS_KEY_ID:
+    description: "AWS Access Key. [AWS Docs](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)"
+    required: true
+    default: null
+  AWS_SECRET_ACCESS_KEY:
+    description: "AWS Secret Access Key. [AWS Docs](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)"
+    required: true
+    default: null
+  AWS_S3_BUCKET:
+    description: "The Name of the S3 Bucket."
+    required: true
+    default: null
+  AWS_REGION:
+    description: "Region of the S3 Bucket"
+    required: true
+    default: null
+  SOURCE_DIR:
+    description: "Local Directory to Sync/Upload to S3."
+    required: false
+    defualt: "."
+runs:
+  using: "docker"
+  image: "Dockerfile"
