@@ -1,0 +1,12 @@
+version: "3.4"
+services:
+  kaiml-eda:
+    build: .
+    image: kaiml/lease:latest
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./data:/app/data
+      - ./input:/app/input
+      - ./notebook:/app/notebook
+    command: pipenv run jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
