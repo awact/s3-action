@@ -17,7 +17,7 @@ jobs:
           cd $GITHUB_WORKSPACE
           echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
           docker pull $BASE_NAME || true
-          docker build --cache-from $BASE_NAME -t $BASE_NAME -f Dockerfile .
+          docker build --cache-from $BASE_NAME -t $BASE_NAME -f pre.Dockerfile .
           docker push $BASE_NAME
         env:
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
