@@ -22,12 +22,6 @@ if [ -z "$AWS_REGION" ]; then
   exit 1
 fi
 
-# Default to CLI defined AWS endpoint
-ENDPOINT_APPEND=""
-if [ "$AWS_S3_ENDPOINT" ]; then
-  ENDPOINT_APPEND="--endpoint-url $AWS_S3_ENDPOINT"
-fi
-
 # Default to syncing entire repo if SOURCE_DIR not set.
 SOURCE_DIR=${SOURCE_DIR:-.}
 
