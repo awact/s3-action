@@ -2,6 +2,7 @@ name: Build Docker Image
 on:
   push:
     paths:
+      - "entrypoint.sh"
       - "pre.Dockerfile"
       - "Pipfile"
       - "Pipfile.lock"
