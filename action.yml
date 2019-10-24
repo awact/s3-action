@@ -24,3 +24,9 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+  args:
+    - ${{ inputs.AWS_ACCESS_KEY_ID }}
+    - ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+    - ${{ inputs.AWS_S3_BUCKET }}
+    - ${{ inputs.AWS_REGION }}
+    - ${{ inputs.SOURCE_DIR }}
