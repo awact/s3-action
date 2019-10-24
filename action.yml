@@ -1,5 +1,8 @@
-name: "S3 Sync"
-description: "Wait a designated number of milliseconds"
+name: "AWS S3 Sync"
+description: "Github action to sync to AWS s3 bucket."
+branding:
+  color: 'yellow'
+  icon: 'upload-cloud'
 inputs:
   AWS_ACCESS_KEY_ID:
     description: "AWS Access Key. [AWS Docs](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)"
