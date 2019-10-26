@@ -22,12 +22,6 @@ if [ -z "$AWS_REGION" ]; then
   exit 1
 fi
 
-# Default to syncing entire repo if SOURCE_DIR not set.
-SOURCE_DIR=${SOURCE_DIR:-.}
-
-# Create a dedicated profile for this action to avoid
-# conflicts with other actions.
-# https://github.com/jakejarvis/s3-sync-action/issues/1
 aws configure --profile s3-action <<-EOF > /dev/null 2>&1
 ${AWS_ACCESS_KEY_ID}
 ${AWS_SECRET_ACCESS_KEY}
@@ -35,8 +29,14 @@ ${AWS_REGION}
 text
 EOF
 
-# Use our dedicated profile and suppress verbose messages.
-# All other flags are optional via `args:` directive.
-sh -c "aws s3 sync ${SOURCE_DIR} s3://${AWS_S3_BUCKET} \
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET} \
               --profile s3-action \
-              --no-progress $*"
+              --no-progress \
+              $*"
+
+aws configure --profile s3-action <<-EOF > /dev/null 2>&1
+null
+null
+null
+text
+EOF
